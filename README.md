@@ -1,2 +1,2 @@
 Study Planner & Assignment Deadline Manager
-Project description: Manage study tasks and assignment deadlines.
+Project description: Organize study schedules and manage assignment deadlines efficiently.
