@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Assignment - Study Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Edit Assignment</h1>
+
+        <form id="editForm">
+            <label for="title">Assignment Title</label>
+            <input type="text" id="title" value="DBMS Assignment 3" required>
+
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" value="Database Management System" required>
+
+            <label for="deadline">Deadline</label>
+            <input type="date" id="deadline" required>
+
+            <label for="priority">Priority</label>
+            <select id="priority">
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+            </select>
+
+            <button type="submit">Update Assignment</button>
+            <p id="message"></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("editForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            document.getElementById("message").textContent =
+                "Assignment details updated successfully!";
+        });
+    </script>
+</body>
+</html>
