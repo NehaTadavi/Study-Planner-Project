@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Assignment - Study Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Add Assignment</h1>
+
+        <form id="assignmentForm">
+            <label for="title">Assignment Title</label>
+            <input type="text" id="title" required>
+
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" required>
+
+            <label for="deadline">Deadline</label>
+            <input type="date" id="deadline" required>
+
+            <label for="priority">Priority</label>
+            <select id="priority">
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+            </select>
+
+            <button type="submit">Add Assignment</button>
+            <p id="assignmentMessage"></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("assignmentForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            document.getElementById("assignmentMessage").textContent =
+                "Assignment details submitted successfully!";
+        });
+    </script>
+</body>
+</html>
