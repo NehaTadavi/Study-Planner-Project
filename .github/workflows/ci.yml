@@ -1,0 +1,63 @@
+
+name: Study Planner CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest pytest-cov flake8
+
+      - name: Build
+        run: |
+          python -m compileall -q .
+
+      - name: Run Tests
+        run: |
+          python -m pytest -v --junitxml=test-results.xml
+
+      - name: Code Analysis
+        run: |
+          python -m flake8 assignment.py deadline.py \
+            test_assignment.py test_deadline.py test_integration.py \
+            --count --statistics
+
+      - name: Generate Coverage Report
+        if: always()
+        run: |
+          python -m pytest \
+            --cov=assignment --cov=deadline \
+            --cov-report=term-missing \
+            --cov-report=xml:coverage.xml \
+            --junitxml=test-results.xml
+
+      - name: Upload CI Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: study-planner-test-reports
+          path: |
+            test-results.xml
+            coverage.xml
+          if-no-files-found: warn
